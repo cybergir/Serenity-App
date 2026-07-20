@@ -20,7 +20,7 @@ Serenity is different. It was built from a real struggle with procrastination, o
 ## Features
 
 ### Task Management
-- Create tasks with categories (Business, Personal, Family), priorities, and due dates
+- Create tasks with categories (Business, Personal, Family), priorities (low, medium, high, urgent), and due dates
 - Subtasks with individual toggles; completing all auto-completes the task
 - Active / Limbo / Archive / Routine tabs
 - Search across titles, descriptions, and subtasks
