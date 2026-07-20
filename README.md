@@ -81,6 +81,14 @@ Serenity is different. It was built from a real struggle with procrastination, o
 - Node.js 18+
 - npm
 
+### Fontend 
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
 ### Backend
 
 ```bash
@@ -90,10 +98,4 @@ source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
 uvicorn app.main:app --reload --port 8000
-
-### Frontend
-
-```bash
-cd client
-npm install
-npm run dev
+```
