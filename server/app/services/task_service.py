@@ -299,7 +299,8 @@ def ensure_routine_tasks(db: Session, user_id: str) -> int:
     Moves expired incomplete routine tasks to Limbo.
     Returns number of tasks created."""
     
-    now = datetime.utcnow()
+    eat = timezone(timedelta(hours=3))
+    now = datetime.now(eat)
     today = now.date()
     created = 0
 
@@ -334,6 +335,12 @@ def ensure_routine_tasks(db: Session, user_id: str) -> int:
         # Generate missing instances up to today
         current = next_date
         while current <= today:
+            if template.routine_type == "weekly" and template.routine_days:
+                days_map = {"mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6}
+                selected = [days_map[d.strip()] for d in template.routine_days.split(",") if d.strip() in days_map]
+                if current.weekday() not in selected:
+                    current += timedelta(days=1)
+                    continue
             existing = db.query(Task).filter(
                 Task.user_id == user_id,
                 Task.title == template.title,
@@ -361,7 +368,7 @@ def ensure_routine_tasks(db: Session, user_id: str) -> int:
                     routine_end_count=template.routine_end_count,
                     routine_end_date=template.routine_end_date,
                     routine_occurrence=1,
-                    is_routine_template=False,  # ← ADD
+                    is_routine_template=False,
                     destination=TaskDestination.ACTIVE,
                     status=TaskStatus.NOT_STARTED
                 )
@@ -377,6 +384,7 @@ def ensure_routine_tasks(db: Session, user_id: str) -> int:
                     )
                     db.add(new_sub)
 
+                db.commit()
                 created += 1
 
             current += timedelta(days=1)

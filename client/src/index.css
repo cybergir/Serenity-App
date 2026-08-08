@@ -1,0 +1,436 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════ */
+
+:root {
+  /* Surfaces */
+  --color-surface: #f8fafc;
+  --color-card: #ffffff;
+  --color-border: #e2e8f0;
+
+  /* Text */
+  --color-text-primary: #1e293b;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+
+  /* Brand */
+  --color-brand: #6366f1;
+  --color-brand-hover: #4f46e5;
+  --color-brand-soft: #eef2ff;
+
+  /* Semantic */
+  --color-success: #10b981;
+  --color-success-soft: #ecfdf5;
+  --color-warning: #f59e0b;
+  --color-warning-soft: #fffbeb;
+  --color-danger: #ef4444;
+  --color-danger-soft: #fef2f2;
+
+  /* Priority */
+  --color-urgent: #ef4444;
+  --color-urgent-soft: #fef2f2;
+  --color-high: #f59e0b;
+  --color-high-soft: #fffbeb;
+  --color-medium: #64748b;
+  --color-medium-soft: #f8fafc;
+  --color-low: #94a3b8;
+  --color-low-soft: #f8fafc;
+}
+
+.dark {
+  --color-surface: #0f172a;
+  --color-card: #1e293b;
+  --color-border: #334155;
+
+  --color-text-primary: #e2e8f0;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+
+  --color-brand: #818cf8;
+  --color-brand-hover: #6366f1;
+  --color-brand-soft: #1e1b4b;
+
+  --color-success-soft: #022c22;
+  --color-warning-soft: #2e2400;
+  --color-danger-soft: #2e0000;
+
+  --color-urgent-soft: #2e0000;
+  --color-high-soft: #2e2400;
+  --color-medium-soft: #1e293b;
+  --color-low-soft: #0f172a;
+}
+
+/* ═══════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════ */
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══════════════════════════════════════
+   SEMANTIC COMPONENT CLASSES
+   ═══════════════════════════════════════ */
+
+/* Cards */
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  @apply rounded-2xl;
+}
+
+.card-padded {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  @apply rounded-2xl p-5;
+}
+
+.card-clickable {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  @apply rounded-2xl p-4 cursor-pointer transition-colors;
+}
+.card-clickable:hover {
+  background: var(--color-brand-soft);
+  border-color: var(--color-brand);
+}
+
+/* Text */
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-brand {
+  color: var(--color-brand);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+/* Headings */
+.heading-page {
+  @apply text-xl font-light;
+  color: var(--color-text-primary);
+}
+
+.heading-section {
+  @apply text-sm font-medium mb-4;
+  color: var(--color-text-secondary);
+}
+
+/* Buttons */
+.btn {
+  @apply px-4 py-2 rounded-xl text-sm font-medium transition-colors;
+}
+
+.btn-primary {
+  background: var(--color-brand);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--color-brand-hover);
+}
+
+.btn-secondary {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+}
+.btn-secondary:hover {
+  background: var(--color-brand);
+  color: white;
+}
+
+.btn-success {
+  background: var(--color-success);
+  color: white;
+}
+.btn-success:hover {
+  background: #059669;
+}
+
+.btn-warning {
+  background: var(--color-warning);
+  color: white;
+}
+.btn-warning:hover {
+  background: #d97706;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+.btn-ghost:hover {
+  color: var(--color-text-primary);
+}
+
+.btn-icon {
+  @apply w-8 h-8 rounded-full border-2 flex items-center justify-center transition-colors;
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+.btn-icon:hover {
+  border-color: var(--color-success);
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+/* Inputs */
+.input {
+  background: var(--color-card);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  @apply px-4 py-3 rounded-xl text-sm;
+}
+.input:focus {
+  @apply outline-none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px var(--color-brand-soft);
+}
+
+.input-search {
+  background: var(--color-card);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  @apply px-4 py-2 rounded-xl text-sm w-full sm:w-64;
+}
+.input-search:focus {
+  @apply outline-none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px var(--color-brand-soft);
+}
+
+.select {
+  background: var(--color-card);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  @apply px-3 py-2 rounded-lg text-sm;
+}
+
+.textarea {
+  background: var(--color-card);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  @apply w-full px-4 py-3 rounded-xl text-sm resize-none;
+}
+.textarea:focus {
+  @apply outline-none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px var(--color-brand-soft);
+}
+
+/* Badges */
+.badge {
+  @apply text-xs px-2 py-0.5 rounded-full;
+}
+
+.badge-urgent {
+  background: var(--color-urgent-soft);
+  color: var(--color-urgent);
+}
+
+.badge-high {
+  background: var(--color-high-soft);
+  color: var(--color-high);
+}
+
+.badge-medium {
+  background: var(--color-medium-soft);
+  color: var(--color-medium);
+}
+
+.badge-low {
+  background: var(--color-low-soft);
+  color: var(--color-low);
+}
+
+.badge-brand {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+}
+
+.badge-success {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+.badge-warning {
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
+}
+
+/* Tabs */
+.tab-bar {
+  @apply flex gap-1 rounded-xl p-1 w-fit;
+  background: var(--color-surface);
+}
+
+.tab {
+  @apply px-4 py-2 rounded-lg text-sm transition-colors;
+  color: var(--color-text-muted);
+}
+.tab:hover {
+  color: var(--color-text-primary);
+}
+
+.tab-active {
+  background: var(--color-card);
+  color: var(--color-text-primary);
+  @apply px-4 py-2 rounded-lg text-sm shadow-sm;
+}
+
+/* Empty state */
+.empty-state {
+  @apply text-center py-12;
+}
+
+.empty-state-icon {
+  @apply text-3xl mb-3;
+}
+
+.empty-state-text {
+  color: var(--color-text-muted);
+  @apply text-sm;
+}
+
+/* Presence mode */
+.presence-mode::-webkit-scrollbar {
+  display: none;
+}
+
+/* Divider */
+.divider {
+  border-color: var(--color-border);
+}
+
+/* Limbo card */
+.card-limbo {
+  background: var(--color-warning-soft);
+  border: 1px solid var(--color-warning);
+  @apply rounded-2xl p-4;
+}
+
+/* Toast / notification bar */
+.notification-bar {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  border: 1px solid var(--color-brand);
+  @apply rounded-2xl p-5;
+}
+
+/* VAULT ANIMATIONS */
+
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.03);
+  }
+}
+
+@keyframes fade-soft {
+  0%, 100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.float-gentle {
+  animation: gentle-float 5s ease-in-out infinite;
+}
+
+.fade-soft {
+  animation: fade-soft 6s ease-in-out infinite;
+}
+
+/* Capture page — text release */
+@keyframes release-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+
+@keyframes sparkle-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-release {
+  animation: release-up 700ms ease-out forwards;
+}
+
+.animate-sparkle-in {
+  animation: sparkle-in 400ms ease-out;
+}
+
+.card-padded:hover {
+  background: var(--color-brand-soft);
+  border-color: var(--color-brand);
+}
+
+@media (max-width: 768px) {
+  .select {
+    background: transparent;
+    border: 1px solid var(--color-border);
+  }
+}
+
+/* Date & Time Input */
+.input-date {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  @apply px-3 py-2 rounded-lg text-sm;
+  min-width: 200px;
+}
+
+.input-date:focus {
+  @apply outline-none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px var(--color-brand-soft);
+}
+
+.input-date::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+  cursor: pointer;
+}
+
+.dark .input-date::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

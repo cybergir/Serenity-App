@@ -1,1 +1,1 @@
-from app.services import task_service, shopping_service, off_day_service, brain_dump_service, daily_pulse_service, micro_win_service, vault_service
+from app.services import task_service, shopping_service, off_day_service, brain_dump_service, daily_pulse_service, micro_win_service, vault_service, password_reset_service

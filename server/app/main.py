@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.database import engine, Base
-from app.api import auth, users, tasks, shopping, off_days, brain_dumps, daily_pulse, micro_wins, vault, push
+from app.api import auth, users, tasks, shopping, off_days, brain_dumps, daily_pulse, micro_wins, vault, push, password_reset
 
 import app.models  # noqa: F401
 
@@ -32,6 +32,7 @@ app.include_router(daily_pulse.router, prefix="/api/daily-pulse", tags=["daily-p
 app.include_router(micro_wins.router, prefix="/api/micro-wins", tags=["micro-wins"])
 app.include_router(vault.router, prefix="/api/vault", tags=["vault"])
 app.include_router(push.router, prefix="/api/push", tags=["push"])
+app.include_router(password_reset.router, prefix="/api/auth", tags=["auth"])
 
 @app.get("/")
 def root():

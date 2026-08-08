@@ -8,3 +8,4 @@ from app.models.daily_pulse import DailyPulse
 from app.models.micro_win import MicroWin
 from app.models.vault import VaultItem
 from app.models.push_subscription import PushSubscription
+from app.models.password_reset import PasswordReset

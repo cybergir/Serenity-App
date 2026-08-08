@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from typing import Optional
@@ -7,7 +7,7 @@ from app.models.user import User
 from app.schemas.task import (
     TaskCreate, TaskUpdate, TaskResponse, TaskListResponse, LimboResolution
 )
-from app.models.task import Task, TaskDestination
+from app.models.task import Task
 from app.services import task_service
 from app.api.users import get_current_user
 
@@ -248,15 +248,15 @@ def list_routines(
         ).order_by(Task.occurrence_date.desc()).first()
         
         # Find the next active instance
-        today = datetime.utcnow().date()
+        eat = timezone(timedelta(hours=3))
+        today_dt = datetime.now(eat).replace(hour=23, minute=59, second=59)
         next_instance = db.query(Task).filter(
             Task.user_id == current_user.id,
             Task.title == template.title,
             Task.routine_type == template.routine_type,
             Task.routine_interval == template.routine_interval,
             Task.occurrence_date.isnot(None),
-            Task.occurrence_date >= today,
-            Task.destination == TaskDestination.ACTIVE.value
+            Task.occurrence_date > today_dt,
         ).order_by(Task.occurrence_date.asc()).first()
         
         frequency_label = template.routine_type
@@ -319,6 +319,5 @@ def check_past_due_tasks(
     current_user: User = Depends(get_current_user)
 ):
     """Check for past-due tasks and move them to Limbo."""
-    task_service.ensure_routine_tasks(db, current_user.id)
     count = task_service.check_and_move_past_due_tasks(db, current_user.id)
     return {"moved_to_limbo": count, "message": f"{count} task(s) moved to Limbo"}
