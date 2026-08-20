@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'https://serenity-app-production-1dc1.up.railway.app/api'
+const API_URL = import.meta.env.VITE_API_URL || 'https://serenity-app-production-1dc1.up.railway.app/api'
 
 const api = axios.create({
   baseURL: API_URL,
@@ -41,4 +41,5 @@ api.interceptors.response.use(
   }
 )
 
+export { API_URL }
 export default api

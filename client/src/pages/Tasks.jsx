@@ -1,3 +1,4 @@
+import { API_URL } from '../services/api'
 import Dropdown from '../components/ui/Dropdown'
 import TaskForm from '../components/tasks/TaskForm'
 import TaskDetail from '../components/tasks/TaskDetail'
@@ -398,7 +399,7 @@ export default function Tasks() {
                               e.stopPropagation()
                               try {
                                 const token = localStorage.getItem('access_token')
-                                await fetch(`/api/tasks/${task.id}/subtasks/${sub.id}/toggle`, {
+                                await fetch(`${API_URL}/tasks/${task.id}/subtasks/${sub.id}/toggle`, {
                                   method: 'POST',
                                   headers: {
                                     'Authorization': `Bearer ${token}`,
