@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+const API_URL = 'https://serenity-app-production-1dc1.up.railway.app/api'
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://serenity-app-production-1dc1.up.railway.app/api',
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -25,7 +27,7 @@ api.interceptors.response.use(
       originalRequest._retry = true
       try {
         const refreshToken = localStorage.getItem('refresh_token')
-        const { data } = await axios.post('/auth/refresh', { refresh_token: refreshToken })
+        const { data } = await axios.post(`${API_URL}/auth/refresh`, { refresh_token: refreshToken })
         localStorage.setItem('access_token', data.access_token)
         originalRequest.headers.Authorization = `Bearer ${data.access_token}`
         return api(originalRequest)
