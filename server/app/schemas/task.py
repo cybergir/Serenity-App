@@ -38,6 +38,7 @@ class TaskCreate(BaseModel):
     routine_end_date: Optional[datetime] = None
     occurrence_date: Optional[datetime] = None
     is_routine_template: bool = False
+    is_routine_active: bool = True
 
 
 class TaskUpdate(BaseModel):
@@ -58,6 +59,8 @@ class TaskUpdate(BaseModel):
     routine_end_type: Optional[str] = None
     routine_end_count: Optional[int] = None
     routine_end_date: Optional[datetime] = None
+    is_routine_template: Optional[bool] = None
+    is_routine_active: Optional[bool] = None
 
 
 class TaskResponse(BaseModel):
@@ -90,6 +93,7 @@ class TaskResponse(BaseModel):
     routine_occurrence: int = 0
     occurrence_date: Optional[datetime] = None
     is_routine_template: bool = False
+    is_routine_active: bool = True 
 
     class Config:
         from_attributes = True

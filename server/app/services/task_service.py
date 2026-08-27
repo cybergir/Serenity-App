@@ -28,6 +28,7 @@ def create_task(db: Session, user_id: str, task_data: TaskCreate) -> Task:
     routine_end_date=task_data.routine_end_date,
     routine_occurrence=1,
     is_routine_template=task_data.routine_type and task_data.routine_type != "never",
+    is_routine_active=True,
     occurrence_date=task_data.due_date, 
     destination=TaskDestination.ACTIVE,
     status=TaskStatus.NOT_STARTED
@@ -122,6 +123,11 @@ def update_task(db: Session, task: Task, task_data: TaskUpdate) -> Task:
     for field, value in update_dict.items():
         if value is not None:
             setattr(task, field, value)
+
+    if 'routine_type' in update_dict:
+        task.is_routine_template = task.routine_type != "never"
+    if 'is_routine_active' in update_dict:
+        task.is_routine_active = update_dict['is_routine_active']
 
     task.updated_at = datetime.utcnow()
     db.commit()
@@ -308,6 +314,7 @@ def ensure_routine_tasks(db: Session, user_id: str) -> int:
     routine_tasks = db.query(Task).filter(
         Task.user_id == user_id,
         Task.is_routine_template == True,
+        Task.is_routine_active == True,
     ).order_by(Task.created_at.desc()).all()
 
     # Group by routine signature to find the latest instance of each routine

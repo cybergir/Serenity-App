@@ -277,6 +277,7 @@ def list_routines(
             "routine_end_count": template.routine_end_count,
             "routine_end_date": template.routine_end_date,
             "frequency_label": frequency_label,
+            "is_routine_active": template.is_routine_active,
             "latest_occurrence": latest.occurrence_date.isoformat() if latest and latest.occurrence_date else None,
             "next_occurrence": next_instance.occurrence_date.isoformat() if next_instance and next_instance.occurrence_date else None,
         })

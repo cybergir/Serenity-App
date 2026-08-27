@@ -74,6 +74,7 @@ class Task(Base):
     routine_end_date: Mapped[datetime] = mapped_column(DateTime, nullable=True)
     routine_occurrence: Mapped[int] = mapped_column(Integer, default=0)
     is_routine_template: Mapped[bool] = mapped_column(Boolean, default=False)
+    is_routine_active: Mapped[bool] = mapped_column(Boolean, default=True)
     occurrence_date: Mapped[datetime] = mapped_column(DateTime, nullable=True)
         
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
