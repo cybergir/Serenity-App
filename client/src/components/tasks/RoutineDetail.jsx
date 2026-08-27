@@ -49,6 +49,22 @@ export default function RoutineDetail({ routine, onClose, onUpdate }) {
     }
   }
 
+  const handleToggleActive = async () => {
+    setSaving(true)
+    try {
+      await updateTask.mutateAsync({
+        taskId: routine.id,
+        updates: { is_routine_active: !routine.is_routine_active }
+      })
+      onUpdate?.()
+      onClose()
+    } catch (err) {
+      console.error('Failed to toggle routine', err)
+    } finally {
+      setSaving(false)
+    }
+  }
+
   const handleDelete = async () => {
     if (!confirm('Delete this routine and all its future instances?')) return
     setDeleting(true)
@@ -200,11 +216,11 @@ export default function RoutineDetail({ routine, onClose, onUpdate }) {
           </button>
           <div className="flex gap-2">
             <button
-              onClick={handleStopRoutine}
+              onClick={handleToggleActive}
               disabled={saving}
               className="btn btn-ghost text-xs flex-1 text-muted hover:text-warning"
             >
-              Stop routine
+              {routine.is_routine_active ? 'Pause routine' : 'Resume routine'}
             </button>
             <button
               onClick={handleDelete}

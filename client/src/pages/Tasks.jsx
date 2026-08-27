@@ -215,11 +215,14 @@ export default function Tasks() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap mb-1">
-                      <h3 className="text-primary font-medium">{routine.title}</h3>
-                      {routine.category && (
-                        <span className="badge badge-medium">{routine.category}</span>
-                      )}
-                    </div>
+                    <h3 className="text-primary font-medium">{routine.title}</h3>
+                    {routine.category && (
+                      <span className="badge badge-medium">{routine.category}</span>
+                    )}
+                    {!routine.is_routine_active && (
+                      <span className="badge badge-warning text-xs">Paused</span>
+                    )}
+                  </div>
                     {routine.description && (
                       <p className="text-sm text-secondary mb-2">{routine.description}</p>
                     )}
@@ -279,20 +282,20 @@ export default function Tasks() {
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-primary font-medium truncate">{task.title}</h3>
-                          <span className={priorityBadgeClass(task.priority)}>{task.priority}</span>
-                          {task.category && (
-                            <span className="badge badge-medium">{task.category}</span>
-                          )}
-                          {task.routine_type && task.routine_type !== 'never' && (
-                            <span className="badge badge-success text-xs">
-                              ⟳ {task.routine_type.charAt(0).toUpperCase() + task.routine_type.slice(1)}
-                            </span>
-                          )}
-                          {task.destination !== 'archive' && (
-                            <span className="badge badge-medium">{statusLabel(task.status)}</span>
-                          )}
-                        </div>
+                        <h3 className="text-primary font-medium truncate">{task.title}</h3>
+                        <span className={priorityBadgeClass(task.priority)}>{task.priority}</span>
+                        {task.category && (
+                          <span className="badge badge-medium">{task.category}</span>
+                        )}
+                        {task.routine_type && task.routine_type !== 'never' && (
+                          <span className="badge badge-success text-xs">
+                            ⟳ {task.routine_type.charAt(0).toUpperCase() + task.routine_type.slice(1)}
+                          </span>
+                        )}
+                        {task.destination !== 'archive' && (
+                          <span className="badge badge-medium">{statusLabel(task.status)}</span>
+                        )}
+                      </div>
                         {task.description && (
                           <p className="text-secondary text-sm mt-1 line-clamp-2">{task.description}</p>
                         )}
