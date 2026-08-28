@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useCompleteTask, useResolveFromLimbo } from '../../hooks/useTasks'
+import { API_URL } from '../../services/api'
 
 export default function TaskDetail({ task, onClose }) {
   const [resolving, setResolving] = useState(false)
@@ -208,7 +209,7 @@ export default function TaskDetail({ task, onClose }) {
                         e.stopPropagation()
                         try {
                           const token = localStorage.getItem('access_token')
-                          await fetch(`/api/tasks/${task.id}/subtasks/${sub.id}/toggle`, {
+                          await fetch(`${API_URL}/tasks/${task.id}/subtasks/${sub.id}/toggle`, {
                             method: 'POST',
                             headers: {
                               'Authorization': `Bearer ${token}`,
