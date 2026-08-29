@@ -16,7 +16,7 @@ export function usePush() {
   const [permission, setPermission] = useState(Notification.permission)
   const [subscribed, setSubscribed] = useState(false)
 
-  const VAPID_PUBLIC_KEY = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEeBkwex1sNKU8oT05WIV-itfGCEUsQUXE8f20Gin5jmEoE4OrtlCkAuCy4qHx7s4qeJoad7gaUXccP6-wKMHnWg'
+  const VAPID_PUBLIC_KEY = 'BFNLWst2W0OAl0XqmTWRettYMOzEiezlW4nH_kNOA9yb_WIC6VdlbMDT5JkL3VeR6IbV1x3GG5pk0yZDWmR-m34'
 
   useEffect(() => {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
