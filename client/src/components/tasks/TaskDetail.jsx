@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useCompleteTask, useResolveFromLimbo } from '../../hooks/useTasks'
+import { useCompleteTask, useResolveFromLimbo, useToggleSubtask } from '../../hooks/useTasks'
 import { API_URL } from '../../services/api'
 
 export default function TaskDetail({ task, onClose }) {
@@ -9,6 +9,7 @@ export default function TaskDetail({ task, onClose }) {
 
   const completeTask = useCompleteTask()
   const resolveFromLimbo = useResolveFromLimbo()
+  const toggleSubtask = useToggleSubtask()
 
   const handleResolve = () => {
     resolveFromLimbo.mutate({
@@ -205,21 +206,12 @@ export default function TaskDetail({ task, onClose }) {
                   return (
                     <div
                       key={sub.id}
-                      onClick={!isArchived ? async (e) => {
+                      onClick={!isArchived ? (e) => {
                         e.stopPropagation()
-                        try {
-                          const token = localStorage.getItem('access_token')
-                          await fetch(`${API_URL}/tasks/${task.id}/subtasks/${sub.id}/toggle`, {
-                            method: 'POST',
-                            headers: {
-                              'Authorization': `Bearer ${token}`,
-                              'Content-Type': 'application/json'
-                            }
-                          })
-                          // onClose()
-                        } catch (err) {
-                          console.error('Failed to toggle subtask', err)
-                        }
+                        toggleSubtask.mutate({
+                          taskId: task.id,
+                          subtaskId: sub.id
+                        })
                       } : undefined}
                       className={`flex items-center gap-3 p-3 rounded-xl border transition-colors ${
                         !isArchived ? 'cursor-pointer hover:bg-[var(--color-brand-soft)]' : 'cursor-default'

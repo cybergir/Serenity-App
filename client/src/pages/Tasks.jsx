@@ -12,7 +12,8 @@ import {
   useCreateTask,
   useCompleteTask,
   useResolveFromLimbo,
-  useUpdateTask
+  useUpdateTask,
+  useToggleSubtask
 } from '../hooks/useTasks'
 import { Link, useSearchParams } from 'react-router-dom'
 
@@ -46,6 +47,7 @@ export default function Tasks() {
   const completeTask = useCompleteTask()
   const resolveFromLimbo = useResolveFromLimbo()
   const updateTask = useUpdateTask()
+  const toggleSubtask = useToggleSubtask()
 
   const tasks = data?.tasks || []
   const total = data?.total || 0
@@ -398,21 +400,12 @@ export default function Tasks() {
                         {task.subtasks.map((sub) => (
                           <li
                             key={sub.id}
-                            onClick={task.destination !== 'archive' ? async (e) => {
+                            onClick={task.destination !== 'archive' ? (e) => {
                               e.stopPropagation()
-                              try {
-                                const token = localStorage.getItem('access_token')
-                                await fetch(`${API_URL}/tasks/${task.id}/subtasks/${sub.id}/toggle`, {
-                                  method: 'POST',
-                                  headers: {
-                                    'Authorization': `Bearer ${token}`,
-                                    'Content-Type': 'application/json'
-                                  }
-                                })
-                                // window.location.reload()
-                              } catch (err) {
-                                console.error('Failed to toggle subtask', err)
-                              }
+                              toggleSubtask.mutate({
+                                taskId: task.id,
+                                subtaskId: sub.id
+                              })
                             } : undefined}
                             className={`text-sm flex items-center gap-2 rounded px-1 py-0.5 transition-colors ${
                               task.destination !== 'archive'

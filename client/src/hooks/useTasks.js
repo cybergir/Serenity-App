@@ -93,3 +93,17 @@ export function useResolveFromLimbo() {
     }
   })
 }
+
+export function useToggleSubtask() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: ({ taskId, subtaskId }) =>
+      api.post(`/tasks/${taskId}/subtasks/${subtaskId}/toggle`)
+        .then(res => res.data),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] })
+    }
+  })
+}
