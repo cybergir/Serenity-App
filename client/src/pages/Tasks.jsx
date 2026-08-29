@@ -409,7 +409,7 @@ export default function Tasks() {
                                     'Content-Type': 'application/json'
                                   }
                                 })
-                                window.location.reload()
+                                // window.location.reload()
                               } catch (err) {
                                 console.error('Failed to toggle subtask', err)
                               }

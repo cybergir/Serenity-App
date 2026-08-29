@@ -216,7 +216,7 @@ export default function TaskDetail({ task, onClose }) {
                               'Content-Type': 'application/json'
                             }
                           })
-                          onClose()
+                          // onClose()
                         } catch (err) {
                           console.error('Failed to toggle subtask', err)
                         }
