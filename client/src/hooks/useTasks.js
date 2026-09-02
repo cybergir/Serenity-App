@@ -1,10 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useAuth } from '../context/AuthContext'
 import api from '../services/api'
 
 
 export function useTasks(destination = 'active', category = '', search='') {
+  const { user } = useAuth()
   return useQuery({
-    queryKey: ['tasks', destination, category, search],
+    queryKey: ['tasks', user?.id, destination, category, search],
     queryFn: async () => {
       if (destination === 'active') {
         try { await api.post('/tasks/check-past-due') } catch (e) {}
@@ -21,8 +23,9 @@ export function useTasks(destination = 'active', category = '', search='') {
 }
 
 export function useLimboCount() {
+  const { user } = useAuth()
   return useQuery({
-    queryKey: ['tasks', 'limbo-count'],
+    queryKey: ['tasks', user?.id, 'limbo-count'],
     queryFn: async () => {
       // Auto-check past-due before counting limbo
       try {
@@ -39,16 +42,18 @@ export function useLimboCount() {
 }
 
 export function useRoutineCount() {
+  const { user } = useAuth()
   return useQuery({
-    queryKey: ['tasks', 'routine-count'],
+    queryKey: ['tasks', user?.id, 'routine-count'],
     queryFn: () => api.get('/tasks/routine/count').then(res => res.data),
     refetchOnWindowFocus: true,
   })
 }
 
 export function useRoutineList() {
+  const { user } = useAuth()
   return useQuery({
-    queryKey: ['tasks', 'routine-list'],
+    queryKey: ['tasks', user?.id, 'routine-list'],
     queryFn: () => api.get('/tasks/routine/list').then(res => res.data),
     refetchOnWindowFocus: true,
   })
