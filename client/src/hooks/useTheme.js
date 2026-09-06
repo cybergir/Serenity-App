@@ -4,10 +4,7 @@ export function useTheme() {
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('serenity-theme')
     if (saved) return saved
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark'
-    }
-    return 'light'
+    return 'dark'
   })
 
   useEffect(() => {
