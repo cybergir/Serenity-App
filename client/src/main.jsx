@@ -6,6 +6,12 @@ import App from './App'
 import { AuthProvider } from './context/AuthContext'
 import './index.css'
 
+if (savedTheme === 'dark') {
+  document.documentElement.classList.add('dark')
+} else {
+  document.documentElement.classList.remove('dark')
+}
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
