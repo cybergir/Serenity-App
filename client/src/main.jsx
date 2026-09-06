@@ -6,6 +6,8 @@ import App from './App'
 import { AuthProvider } from './context/AuthContext'
 import './index.css'
 
+const savedTheme = localStorage.getItem('serenity-theme') || 'dark'
+
 if (savedTheme === 'dark') {
   document.documentElement.classList.add('dark')
 } else {
