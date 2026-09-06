@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
-import smtplib
 import os
-from email.mime.text import MIMEText
+import requests
 from app.database import get_db
 from app.models.user import User
 from app.schemas.password_reset import (
@@ -14,22 +13,31 @@ router = APIRouter()
 
 
 def send_reset_email(email: str, token: str):
-    """Send password reset email via Gmail SMTP."""
+    """Send password reset email via Resend."""
     reset_link = f"https://serenity-app-one.vercel.app/reset-password?token={token}"
     
-    msg = MIMEText(
-        f"Click here to reset your Serenity password:\n\n{reset_link}\n\n"
-        "This link expires in 1 hour. If you didn't request this, you can ignore this email."
-    )
-    msg["Subject"] = "Reset your Serenity password"
-    msg["From"] = os.getenv("SMTP_EMAIL")
-    msg["To"] = email
-    
     try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(os.getenv("SMTP_EMAIL"), os.getenv("SMTP_PASSWORD"))
-            server.send_message(msg)
-        print(f"Password reset email sent to {email}")
+        response = requests.post(
+            "https://api.resend.com/emails",
+            headers={
+                "Authorization": f"Bearer {os.getenv('RESEND_API_KEY')}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "from": os.getenv("RESEND_FROM_EMAIL", "noreply@serenity.app"),
+                "to": email,
+                "subject": "Reset your Serenity password",
+                "html": f"""
+                <div style="font-family: sans-serif; max-width: 500px; margin: auto;">
+                    <h2 style="color: #6366f1;">serenity</h2>
+                    <p>You requested a password reset.</p>
+                    <p><a href="{reset_link}" style="background: #6366f1; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">Reset your password</a></p>
+                    <p style="color: #94a3b8; font-size: 14px;">This link expires in 1 hour. If you didn't request this, you can ignore this email.</p>
+                </div>
+                """
+            }
+        )
+        print(f"Password reset email sent to {email}: {response.status_code}")
     except Exception as e:
         print(f"Failed to send email: {e}")
 
