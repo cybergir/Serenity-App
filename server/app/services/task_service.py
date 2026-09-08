@@ -108,10 +108,18 @@ def get_tasks(
     total = query.count()
 
     # Paginate and order by creation date (newest first)
-    tasks = query.order_by(Task.created_at.desc()) \
-                 .offset((page - 1) * page_size) \
-                 .limit(page_size) \
-                 .all()
+    if destination == "archive":
+        # Archive: most recently completed first
+        tasks = query.order_by(Task.completed_at.desc()) \
+                    .offset((page - 1) * page_size) \
+                    .limit(page_size) \
+                    .all()
+    else:
+        # Active/Limbo: soonest due date first
+        tasks = query.order_by(Task.due_date.asc()) \
+                    .offset((page - 1) * page_size) \
+                    .limit(page_size) \
+                    .all()
 
     return tasks, total
 
