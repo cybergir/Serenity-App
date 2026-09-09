@@ -297,6 +297,11 @@ export default function Tasks() {
                         {task.destination !== 'archive' && (
                           <span className="badge badge-medium">{statusLabel(task.status)}</span>
                         )}
+                        {task.destination === 'archive' && (
+                          <span className={task.completed_at ? 'badge badge-success' : 'badge badge-warning'}>
+                            {task.completed_at ? 'Done' : 'Dismissed'}
+                          </span>
+                        )}
                       </div>
                         {task.description && (
                           <p className="text-secondary text-sm mt-1 line-clamp-2">{task.description}</p>
