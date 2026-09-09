@@ -62,7 +62,7 @@ export default function AppShell() {
 
       <div className="flex">
         {/* Sidebar - Desktop */}
-        <nav className="hidden md:flex flex-col w-56 bg-[var(--color-card)] border-r border-[var(--color-border)] min-h-[calc(100vh-57px)] p-4 gap-1">
+        <nav className="hidden lg:flex flex-col w-56 bg-[var(--color-card)] border-r border-[var(--color-border)] min-h-[calc(100vh-57px)] p-4 gap-1">
           {navItems.map((item) => (
             <NavLink
               key={item.to}
@@ -104,13 +104,13 @@ export default function AppShell() {
         </nav>
 
         {/* Main content */}
-        <main className="flex-1 p-4 md:p-6 max-w-4xl">
+        <main className="flex-1 p-4 lg:p-6 max-w-4xl pb-20 lg:pb-6">
           <Outlet />
         </main>
       </div>
 
       {/* Mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[var(--color-card)] border-t border-[var(--color-border)] px-2 py-1 flex justify-around">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-[var(--color-card)] border-t border-[var(--color-border)] px-2 py-1 flex justify-around">
         {navItems.slice(0, 5).map((item) => (
           <NavLink
             key={item.to}
