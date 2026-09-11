@@ -1,21 +1,92 @@
-MIT License
+PROPRIETARY LICENSE
 
-Copyright (c) 2026 Dorothy Mwende
+Copyright © 2026 Ruby. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Serenity is a proprietary software project developed by Ruby.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+DEFINITIONS
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+In this license:
+
+"Author" means Ruby, the original creator and copyright holder
+of the Software.
+
+"Software" means the Serenity application, including its original source
+code, documentation, designs, and other materials created by the Author,
+excluding third-party components as described in Section 1.
+
+1. OWNERSHIP
+
+The original source code, documentation, designs, and other materials
+created by the Author and included in the Software are the property of
+the Author, subject to the separate rights and licenses applicable to
+third-party software, libraries, frameworks, fonts, assets, and other
+components included in or used by the project.
+
+2. NO LICENSE GRANTED
+
+No license, express or implied, is granted to any person or entity to
+use, copy, modify, merge, publish, distribute, sublicense, sell, or
+otherwise exploit the Software, in whole or in part, for any purpose,
+without the prior written permission of the Author.
+
+3. RESTRICTIONS
+
+Without limiting the generality of Section 2, you may NOT:
+
+   a) Copy, reproduce, or distribute the Software or any portion of it;
+   b) Modify, adapt, translate, or create derivative works based on the Software;
+   c) Use the Software for any commercial purpose;
+   d) Sublicense, rent, lease, sell, or otherwise transfer the Software;
+   e) Remove, alter, or obscure any copyright, trademark, or other proprietary
+      notices contained in the Software;
+   f) Claim authorship or ownership of the Software or any portion of it.
+
+4. LIMITED PERMISSION TO VIEW
+
+The Software is made publicly visible on platforms such as GitHub for
+portfolio, evaluation, and educational reference purposes only. This
+visibility does NOT grant any license or right to use, copy, modify,
+distribute, or commercialize the Software. A public repository does not
+constitute open-source software.
+
+5. NO WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+6. ENFORCEMENT
+
+Any unauthorized use of the Software constitutes a violation of this
+license and applicable copyright law. The Author reserves the right to
+pursue any and all remedies available under applicable law, including
+copyright infringement claims and platform copyright reporting processes.
+
+7. LICENSING INQUIRIES
+
+For permission to use, license, or commercialize the Software, please
+contact:
+
+   Ruby (Ruby)
+   rubymwende2@gmail.com
+
+8. GOVERNING LAW
+
+This license shall be governed by and construed in accordance with the
+laws of Kenya, without regard to its conflict of law principles.
+
+9. FUTURE TRANSFER AND VERSIONING
+
+The Author reserves the right to transfer or license the Software to a
+company or entity (including Garnetia Group) in the future. Any such
+transfer or license shall be documented separately in writing.
+
+Any future transfer, license, or change of ownership shall apply only to
+versions of the Software released after the effective date of such
+transfer or change. Prior versions of the Software shall remain governed
+by the terms of this license unless expressly stated otherwise in a
+separate written agreement signed by the Author.
